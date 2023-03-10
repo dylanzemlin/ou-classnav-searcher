@@ -6,7 +6,10 @@ import axios from "axios";
 import ora from "ora";
 import fs from "fs";
 
-const CLASSNAV_URL = "https://classnav.ou.edu/index_ajax.php?iColumns=18&iDisplayLength=30&semester=202220&subject=all&schedule=all&delivery=all&term=all&available=false&waitlist=false";
+const date = new Date()
+const semester = date.getFullYear().toString() + (date.getMonth() < 7 ? "10" : "20") // return spring classes if used before august, fall classes if used after
+// who takes summer classes anyway?
+const CLASSNAV_URL = "https://classnav.ou.edu/index_ajax.php?iColumns=18&iDisplayLength=30&semester=" + semester + "&subject=all&schedule=all&delivery=all&term=all&available=false&waitlist=false";
 
 const cacheClasses = async () => {
     const spinner = ora("Fetching classes").start();
